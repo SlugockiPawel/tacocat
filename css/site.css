@@ -68,10 +68,6 @@ footer .social > a:hover {
 }
 
 .checklist > li em {
-  color: var(--secondary-color);
-}
-
-.checklist > li em {
   color: var(--dark-color);
 }
 
