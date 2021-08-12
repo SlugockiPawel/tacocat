@@ -2,7 +2,7 @@
 // controller function
 function handleBtnClick() {
   // make sure alert message is invisible
-  hideAlertBox();
+  resetAlertBox();
 
   const userInput = getUserInput();
 
@@ -51,7 +51,7 @@ function prepareAlertBox(phrase) {
     header = "Well Done! You have entered a palindrome!";
     alertColorClass = 'alert-success';
   } else {
-    header = "Sorry! You did not enter a palindrome!!";  
+    header = "Sorry! You did not enter a palindrome!";  
     alertColorClass = 'alert-danger';
   }
 
@@ -61,7 +61,7 @@ function prepareAlertBox(phrase) {
 }
 
 // view functions
-function hideAlertBox() {
+function resetAlertBox() {
   const alertBox = document.getElementById("alert");
   alertBox.classList.add("invisible");
   alertBox.classList.remove("alert-success", "alert-danger");

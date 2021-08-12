@@ -82,16 +82,97 @@
           <div class="row row-cols-1 row-cols-md-2">
               <div class="col-lg-8">
                   <pre class="line-numbers"><code class="language-javascript">
-                    //Call HelloWorld
-                    function HelloWorld() {
-                        alert('Hello World');
-                    }
+                    // handle button click
+// controller function
+function handleBtnClick() {
+  // make sure alert message is invisible
+  hideAlertBox();
+
+  const userInput = getUserInput();
+  const processedPhrase = processUserInput(userInput);
+
+  prepareAlertBox(processedPhrase);
+
+  showAlertBox();
+}
+
+// logic functions
+function getUserInput() {
+  return (userInput = document.getElementById("userString").value);
+}
+
+function processUserInput(input) {
+  const userString = input.toLowerCase();
+  const regEx = /[^a-z0-9]/gi;
+
+  return userString.replace(regEx, "");
+}
+
+function isPalindrome(phrase) {
+  return reverseStr(phrase) === phrase;
+}
+
+function reverseStr(inputStr) {
+  let revStr = "";
+  for (let i = inputStr.length - 1; i >= 0; i--) {
+    revStr += inputStr[i];
+  }
+
+  return revStr;
+}
+
+function prepareAlertBox(phrase) {
+  const alertBox = document.getElementById("alert");
+  const alertHeader = document.getElementById("alertHeader");
+  const alertMsg = document.getElementById("alertMsg");
+
+  let header = '';
+  const msg = `Your phrase reversed is: ${reverseStr(phrase)}`;
+  let alertColorClass = '';
+
+  if (isPalindrome(phrase)) {
+    header = "Well Done! You have entered a palindrome!";
+    alertColorClass = 'alert-success';
+  } else {
+    header = "Sorry! You did not enter a palindrome!!";  
+    alertColorClass = 'alert-danger';
+  }
+
+  alertHeader.innerText = header;
+  alertMsg.innerText = msg;
+  alertBox.classList.add(alertColorClass);
+}
+
+// view functions
+function resetAlertBox() {
+  const alertBox = document.getElementById("alert");
+  alertBox.classList.add("invisible");
+  alertBox.classList.remove("alert-success", "alert-danger");
+}
+
+function showAlertBox() {
+  const alertBox = document.getElementById("alert");
+  alertBox.classList.remove("invisible");
+}
                   </code></pre>
               </div>
               <div class="col-lg-4">
-                <p>The Code is structured in one function.</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a function that displays am alert with a message of 'Hello World'</p>
+                <h5>handleBtnClick()</h5>
+                <p>Main controller function triggered by button clicked. It hides alert box and gets and process user input. Then, new alert box is prepared (based on condition if the user input is a palidrome or not). Lastly, alert box with information is displayed to the user.</p>
+                <h5>getUserInput()</h5>
+                <p>Logic function that gets input the user wrote to the page form.</p>
+                <h5>processUserInput()</h5>
+                <p>Logic function that process user input- it uses regular expression to trim input of any non-letter and non-digit characters.</p>
+                <h5>reverseStr()</h5>
+                <p>Logic function that returns reversed string.</p>
+                <h5>isPalindrome()</h5>
+                <p>Logic boolean function that returns true/false if the string is a palindrome or not.</p>
+                <h5>prepareAlertBox()</h5>
+                <p>Logic function that builds alert element (header and message) based on the isPalidrome() function output.</p>
+                <h5>resetAlertBox()</h5>
+                <p>View function that reset alert element- hides it and removes color class.</p>
+                <h5>showAlertBox()</h5>
+                <p>View function that shows alert element.</p>
               </div>
           </div>
       </div>
