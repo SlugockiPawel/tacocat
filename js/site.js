@@ -1,50 +1,24 @@
-//handle button click
+// handle button click
+// controller function
 function handleBtnClick() {
   // make sure alert message is invisible
   hideAlertBox();
 
-  // get user input
   const userInput = getUserInput();
 
-  // prepare userInput
-  const cleanedPhrase = prepareUserInput(userInput);
-  let alertColor = "";
+  const processedPhrase = processUserInput(userInput);
 
-  if (isPalindrome(cleanedPhrase)) {
-    const header = "Well Done! You have entered a palindrome!";
-    const msg = `Your phrase reversed is: ${reverseStr(cleanedPhrase)}`;
-    prepareAlertBox(header, msg, "success");
-  } else {
-    const header = "Sorry! You did not enter a palindrome!!";
-    const msg = `Your phrase reversed is: ${reverseStr(cleanedPhrase)}`;
-    prepareAlertBox(header, msg, "danger");
-  }
+  prepareAlertBox(processedPhrase);
 
-  displayAlertBox();
+  showAlertBox();
 }
 
-// prepare input
-
-// check if is palidrome
-
-// display message
-
-function hideAlertBox() {
-  const alertBox = document.getElementById("alert");
-  alertBox.classList.remove("alert-success", "alert-danger");
-  alertBox.classList.add("invisible");
-}
-
-function displayAlertBox(color) {
-  const alertBox = document.getElementById("alert");
-  alertBox.classList.remove("invisible");
-}
-
+// logic functions
 function getUserInput() {
   return (userInput = document.getElementById("userString").value);
 }
 
-function prepareUserInput(input) {
+function processUserInput(input) {
   const userString = input.toLowerCase();
   const regEx = /[^a-z0-9]/gi;
 
@@ -52,9 +26,7 @@ function prepareUserInput(input) {
 }
 
 function isPalindrome(phrase) {
-  const reversed = reverseStr(phrase);
-
-  return reversed === phrase;
+  return reverseStr(phrase) === phrase;
 }
 
 function reverseStr(inputStr) {
@@ -66,12 +38,36 @@ function reverseStr(inputStr) {
   return revStr;
 }
 
-function prepareAlertBox(header, message, color) {
+function prepareAlertBox(phrase) {
+  const alertBox = document.getElementById("alert");
   const alertHeader = document.getElementById("alertHeader");
   const alertMsg = document.getElementById("alertMsg");
-  const alertBox = document.getElementById("alert");
-  
-  alertBox.classList.add(`alert-${color}`);
+
+  let header = '';
+  const msg = `Your phrase reversed is: ${reverseStr(phrase)}`;
+  let alertColorClass = '';
+
+  if (isPalindrome(phrase)) {
+    header = "Well Done! You have entered a palindrome!";
+    alertColorClass = 'alert-success';
+  } else {
+    header = "Sorry! You did not enter a palindrome!!";  
+    alertColorClass = 'alert-danger';
+  }
+
   alertHeader.innerText = header;
-  alertMsg.innerText = message;
+  alertMsg.innerText = msg;
+  alertBox.classList.add(alertColorClass);
+}
+
+// view functions
+function hideAlertBox() {
+  const alertBox = document.getElementById("alert");
+  alertBox.classList.add("invisible");
+  alertBox.classList.remove("alert-success", "alert-danger");
+}
+
+function showAlertBox() {
+  const alertBox = document.getElementById("alert");
+  alertBox.classList.remove("invisible");
 }
