@@ -71,6 +71,10 @@ footer .social > a:hover {
   color: var(--secondary-color);
 }
 
+.checklist > li em {
+  color: var(--dark-color);
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
   white-space: pre-wrap;
